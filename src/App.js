@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {
   ReactFlow,
   MiniMap,
@@ -8,6 +8,8 @@ import {
   addEdge,
   Background
 } from '@xyflow/react';
+import NodeMenu from './nodeTypes/nodeMenu';
+import {nodeData} from './nodeData/nodeData'; 
  
 import '@xyflow/react/dist/style.css';
 
@@ -18,21 +20,31 @@ const teste = {
   "content": {
     "text": "Sobre qual assunto você quer conversar?"
   }}
- 
-const initialNodes = [
-  { id: '1', position: { x: 0, y: 0 }, data: { label: teste.id + teste.type} },
-  { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
-];
+
+  const nodesTypeMenu = nodeData.filter((node) => node.type === 'MENU');
+
+  // Gerar nodes a partir do NodeMenu
+  const menuNodes = nodesTypeMenu.map((node, index) => ({
+    id: (index+1).toString(),
+    position: { x: 0, y: index * 100 },
+    data: { label: `${node.type} \n ${node.content.text}` }
+  }));
+
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
+
  
 export default function App() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState();
  
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges],
   );
+  useEffect(() => {
+    setNodes(menuNodes)
+    console.log(menuNodes)
+  }, [])
 
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
