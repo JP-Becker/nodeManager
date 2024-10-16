@@ -10,25 +10,19 @@ import {
 } from '@xyflow/react';
 import NodeMenu from './nodeTypes/nodeMenu';
 import { nodeData } from './nodeData/nodeData';
+import DataTypeFilter from './nodeData/dataTypeFilter';
 
 import '@xyflow/react/dist/style.css';
 
 const nodeTypes = { nodeMenu: NodeMenu };
 
-const nodesTypeMenu = nodeData.filter((node) => node.type === 'MENU');
-
 // Gerar nodes a partir do NodeMenu
-const menuNodes = nodesTypeMenu.map((node, index) => ({
+const nodesMapeados = nodeData.map((node, index) => ({
   id: node.id,
   position: { x: 0, y: index * 100 },
-  type: 'nodeMenu',
-  data: { label: `${node.type} \n ${node.content.text}` }
+  type: DataTypeFilter(node.type),
+  data: { label: [node.type, node.content.text] }
 }));
-
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
-
-
-
 
 export default function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -39,8 +33,8 @@ export default function App() {
     [setEdges],
   );
   useEffect(() => {
-    setNodes(menuNodes)
-    console.log(menuNodes.map((node) => node.data))
+    setNodes(nodesMapeados)
+    console.log(nodesMapeados)
   }, [])
 
   return (
@@ -53,11 +47,12 @@ export default function App() {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         nodeTypes={nodeTypes}
-      >
+      />
+        {/* <NodeMenu />
         <Controls />
         <MiniMap />
         <Background variant="dots" gap={12} size={1} />
-      </ReactFlow>
+      </ReactFlow> */}
     </div>
   );
 }
