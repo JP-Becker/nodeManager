@@ -6,13 +6,16 @@ import { Handle, Position } from '@xyflow/react';
 export default function NodeMenu({ data }) {
     console.log(data);
 
+    let teste = data.label[2].map((option) => {
+        return <p>Opção: {option.content.name}</p>
+    })
+
+    console.log(teste);
     return (
     <Container>
         <h1>{data.label[0]}</h1>
-        <p>Texto: {data.label[1]}</p>     
-        <p>Options: {data.label[2].map((option) => {
-            return option.content.name
-        })}</p>   
+        <p>Texto: {data.label[1]}</p>
+        <div>{teste}</div>  
     </Container>
     )
 }
