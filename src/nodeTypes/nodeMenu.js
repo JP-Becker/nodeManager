@@ -10,7 +10,9 @@ export default function NodeMenu({ data }) {
     <Container>
         <h1>{data.label[0]}</h1>
         <p>Texto: {data.label[1]}</p>     
-        <p>TESTE</p>   
+        <p>Options: {data.label[2].map((option) => {
+            return option.content.name
+        })}</p>   
     </Container>
     )
 }

@@ -3,7 +3,7 @@ export default function DataTypeFilter(nodeType) {
             switch (nodeType) {
                 case 'MENU':
                     return 'nodeMenu';
-
+                // IDEIA: CRIAR UM OBJETO AQUI COM A COR Q CADA TIPO DE NODE VAI TER, E OUTRAS PROPRIEDADES MUTÁVEIS QUE PODEM SER ALTERADAS DINAMICAMENTE
                 case 'WEBLINK':
                     return 'nodeWeblink';
 

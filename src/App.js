@@ -21,7 +21,7 @@ const nodesMapeados = nodeData.map((node, index) => ({
   id: node.id,
   position: { x: 0, y: index * 100 },
   type: DataTypeFilter(node.type),
-  data: { label: [node.type, node.content.text] }
+  data: { label: [node.type, node.content.text, node.content.options] }
 }));
 
 export default function App() {
