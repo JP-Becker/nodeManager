@@ -8,13 +8,14 @@ import {
   addEdge,
   Background
 } from '@xyflow/react';
-import NodeMenu from './nodeTypes/nodeMenu';
 import { nodeData } from './nodeData/nodeData';
 import DataTypeFilter from './nodeData/dataTypeFilter';
+import NodeMenu from './components/nodeMenu/nodeMenu';
 
 import '@xyflow/react/dist/style.css';
+import NodeText from './components/nodeText/nodeText';
 
-const nodeTypes = { nodeMenu: NodeMenu };
+const nodeTypes = { nodeMenu: NodeMenu, nodeText: NodeText };
 
 // Gerar nodes a partir do NodeMenu
 const nodesMapeados = nodeData.map((node, index) => ({
