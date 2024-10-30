@@ -3,7 +3,6 @@ import { Container } from './nodeTextStyled';
 import { Handle, Position } from '@xyflow/react';
 
 export default function NodeText({ data }) {
-    console.log(data);
 
     // let opcoesDoMenu = data.label[2].map((option) => {
     //     return <p>Opção: {option.content.name}</p>

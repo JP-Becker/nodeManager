@@ -20,14 +20,18 @@ const nodeTypes = { nodeMenu: NodeMenu, nodeText: NodeText };
 // Gerar nodes a partir do NodeMenu
 const nodesMapeados = nodeData.map((node, index) => ({
   id: node.id,
-  position: { x: 0, y: index * 100 },
+  position: { x: 0, y: index * 150 },
   type: DataTypeFilter(node.type),
-  data: { label: [node.type, node.content.text, node.content.options] }
+  data: { label: [node.type, node.content.text, node.content.options, node.id, node.nextNodeId] }
 }));
+
+const initialEdges = [
+  {id: '1', source: nodesMapeados[0].id, target: nodesMapeados[1].id }
+]
 
 export default function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState();
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
@@ -35,7 +39,6 @@ export default function App() {
   );
   useEffect(() => {
     setNodes(nodesMapeados)
-    console.log(nodesMapeados)
   }, [])
 
   return (
@@ -48,12 +51,12 @@ export default function App() {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         nodeTypes={nodeTypes}
-      />
-        {/* <NodeMenu />
+      >
         <Controls />
-        <MiniMap />
+       
         <Background variant="dots" gap={12} size={1} />
-      </ReactFlow> */}
+         <MiniMap />
+      </ReactFlow>
     </div>
   );
 }
