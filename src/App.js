@@ -14,15 +14,16 @@ import NodeMenu from './components/nodeMenu/nodeMenu';
 
 import '@xyflow/react/dist/style.css';
 import NodeText from './components/nodeText/nodeText';
+import NodeOption from './components/nodeOption/nodeOption';
 
-const nodeTypes = { nodeMenu: NodeMenu, nodeText: NodeText };
+const nodeTypes = { nodeMenu: NodeMenu, nodeText: NodeText, nodeOption: NodeOption};
 
 // Gerar nodes a partir do NodeMenu
 const nodesMapeados = nodeData.map((node, index) => ({
   id: node.id,
   position: { x: 0, y: index * 150 },
   type: DataTypeFilter(node.type),
-  data: { label: [node.type, node.content.text, node.content.options, node.id, node.nextNodeId] }
+  data: { label: [node?.type, node?.content.text, node?.content.options, node?.id, node?.nextNodeId] }
 }));
 
 const initialEdges = [
